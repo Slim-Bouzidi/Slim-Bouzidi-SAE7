@@ -2,7 +2,7 @@ package com.slimbouzidi.sae7.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+import java.io.Serializable;
 import java.util.Set;
 
 
@@ -11,7 +11,10 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Foyer {
+@ToString
+@EqualsAndHashCode
+@Builder
+public class Foyer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

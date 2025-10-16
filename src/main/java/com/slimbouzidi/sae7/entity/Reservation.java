@@ -2,7 +2,7 @@ package com.slimbouzidi.sae7.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -12,7 +12,10 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Reservation {
+@ToString
+@EqualsAndHashCode
+@Builder
+public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +28,6 @@ public class Reservation {
     @ManyToOne
     private Chambre chambre;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "reservation")
+    @ManyToMany(mappedBy = "reservation", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Etudiant> etudiant;
 }

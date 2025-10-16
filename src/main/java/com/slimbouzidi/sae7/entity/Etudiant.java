@@ -2,7 +2,7 @@ package com.slimbouzidi.sae7.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -11,7 +11,10 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Etudiant {
+@ToString
+@EqualsAndHashCode
+@Builder
+public class Etudiant implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +30,7 @@ public class Etudiant {
 
     private Date dateNaissance;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Reservation> reservation;
 
 }
